@@ -59,12 +59,13 @@ footer {
 }
 
 .portrait {
+  width: 100%;
   max-width: 220px;
   height: auto;
-  width: auto;
   border-radius: 5px;
   display: block;
 }
+
 
 .bio-text {
   max-width: 600px;
