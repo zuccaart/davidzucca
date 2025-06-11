@@ -183,9 +183,8 @@
     </div>
   </div>
 
-  <script>
+ <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Get all gallery links
     const galleryLinks = document.querySelectorAll('.gallery-link');
     const viewer = document.getElementById('image-viewer');
     const viewerImg = document.querySelector('.viewer-image');
@@ -195,47 +194,44 @@
     const viewerDimensions = document.getElementById('viewer-dimensions');
     const closeBtn = document.querySelector('.close-btn');
 
-    // Add click handler to each gallery item
     galleryLinks.forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // Get data attributes
+
         const imgSrc = this.dataset.image;
         const title = this.dataset.title;
         const medium = this.dataset.medium;
         const year = this.dataset.year;
         const dimensions = this.dataset.dimensions;
-        
-        // Update viewer
+
+        if (!imgSrc) return; // Prevent showing viewer with missing data
+
         viewerImg.src = imgSrc;
-        viewerImg.alt = title;
-        viewerTitle.textContent = title;
-        viewerMedium.textContent = medium;
-        viewerYear.textContent = year;
-        viewerDimensions.textContent = dimensions;
-        
-        // Show viewer
-        viewer.style.display = 'flex';
+        viewerImg.alt = title || '';
+        viewerTitle.textContent = title || '';
+        viewerMedium.textContent = medium || '';
+        viewerYear.textContent = year || '';
+        viewerDimensions.textContent = dimensions || '';
+
+        viewer.classList.add('active');
         document.body.style.overflow = 'hidden';
       });
     });
 
-    // Close viewer
     closeBtn.addEventListener('click', function() {
-      viewer.style.display = 'none';
+      viewer.classList.remove('active');
       document.body.style.overflow = 'auto';
     });
 
-    // Close when clicking outside
     viewer.addEventListener('click', function(e) {
       if (e.target === viewer) {
-        viewer.style.display = 'none';
+        viewer.classList.remove('active');
         document.body.style.overflow = 'auto';
       }
     });
   });
-  </script>
+</script>
+
 
 </body>
 </html>
