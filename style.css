@@ -47,23 +47,35 @@ header p {
 }
 
 .bio-text {
+  width: 100%; /* Ensure it takes full width on mobile */
   max-width: 600px;
 }
 
-.bio-text h2 {
-  font-size: 1.75rem;
-  margin-bottom: 0.25rem;
-}
+/* Desktop layout (768px and up) */
+@media (min-width: 768px) {
+  .bio {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    text-align: left; /* Ensure text alignment is left */
+  }
 
-.years {
-  font-size: 1rem;
-  color: #777;
-  display: block;
-  margin-top: 0.2rem;
-}
+  .portrait {
+    width: 220px; /* Fixed width */
+    flex: 0 0 auto; /* Don't grow or shrink */
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
 
-.bio-text p {
-  margin-top: 1rem;
+  .bio-text {
+    flex: 1; /* Take remaining space */
+    max-width: none; /* Remove max-width constraint */
+  }
+
+  .bio-text p {
+    text-align: justify;
+    hyphens: auto;
+  }
 }
 
 /* Gallery */
