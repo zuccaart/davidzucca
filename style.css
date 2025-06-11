@@ -36,7 +36,6 @@ header p {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 1rem;
-  text-align: center;
 }
 
 .portrait {
@@ -115,16 +114,21 @@ footer {
 @media (min-width: 768px) {
   .bio {
     flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
+    align-items: flex-start; /* Changed from center to flex-start */
+    justify-content: center; /* Add this to center the whole bio block */
   }
 
   .portrait {
     margin-right: 2rem;
     margin-bottom: 0;
+    flex-shrink: 0; /* Prevents image from shrinking */
   }
 
   .bio-text {
     flex: 1;
+  }
+  .bio-text p {
+    text-align: justify; /* Justify the paragraph text */
+    hyphens: auto; /* Optional: enables hyphenation for better justification */
   }
 }
