@@ -5,6 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>David Zucca Art</title>
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+  /* IMAGE VIEWER STYLES */
+  .image-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .image-viewer.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .viewer-image {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+
+  .image-meta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    backdrop-filter: blur(5px);
+  }
+
+  .close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .close-btn:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .image-meta {
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .viewer-image {
+      max-height: 60vh;
+    }
+  }
+</style>
+
 </head>
 <body>
 
