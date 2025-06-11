@@ -126,21 +126,26 @@ footer {
 @media (min-width: 768px) {
   .bio {
     flex-direction: row;
-    align-items: flex-start; /* Changed from center to flex-start */
-    justify-content: center; /* Add this to center the whole bio block */
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: nowrap; /* Ensure items stay in one row */
   }
 
   .portrait {
+    width: 220px; /* Fixed width */
+    flex: 0 0 auto; /* Don't grow or shrink */
     margin-right: 2rem;
-    margin-bottom: 0;
-    flex-shrink: 0; /* Prevents image from shrinking */
+    margin-left: 2rem; /* Add left margin for better centering */
   }
 
   .bio-text {
     flex: 1;
+    max-width: calc(100% - 220px - 4rem); /* Account for image width + margins */
+    padding-right: 2rem; /* Add some right padding */
   }
+
   .bio-text p {
-    text-align: justify; /* Justify the paragraph text */
-    hyphens: auto; /* Optional: enables hyphenation for better justification */
+    text-align: justify;
+    hyphens: auto;
   }
 }
