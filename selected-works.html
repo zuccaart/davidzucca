@@ -326,6 +326,23 @@
       e.stopPropagation();
       showImage((currentIndex + 1) % images.length);
     });
+
+        document.addEventListener('keydown', (e) => {
+      if (!viewer.classList.contains('active')) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          showImage((currentIndex - 1 + images.length) % images.length);
+          break;
+        case 'ArrowRight':
+          showImage((currentIndex + 1) % images.length);
+          break;
+        case 'Escape':
+          viewer.classList.remove('active');
+          document.body.style.overflow = 'auto';
+          break;
+      }
+    });
   });
 </script>
 
