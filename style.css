@@ -222,10 +222,9 @@
 
 /* HEADER STYLES */
 .top-header {
-  background-color: #222;
+  background-color: white;
   padding: 1rem 2rem;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #ddd;
 }
 
 .header-container {
@@ -240,7 +239,8 @@
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
-  color: white;
+  color: #003366;
+  margin-right: auto;
 }
 
 .site-title:hover {
@@ -248,7 +248,7 @@
 }
 
 .header-nav .collection-button {
-  background: #444;
+  background: #003366;
   color: white;
   padding: 0.5rem 1rem;
   text-decoration: none;
@@ -257,5 +257,6 @@
 }
 
 .header-nav .collection-button:hover {
-  background: #666;
+  background: #00509e;
 }
+
