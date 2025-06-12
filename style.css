@@ -220,7 +220,6 @@
   }
 }
 
-/* HEADER STYLES */
 .top-header {
   background-color: white;
   padding: 1rem 2rem;
@@ -229,10 +228,11 @@
 
 .header-container {
   max-width: 1000px;
-  margin: 0 1rem;
+  margin: 0 auto; /* Center the whole header block */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .site-title {
@@ -240,7 +240,6 @@
   font-weight: bold;
   text-decoration: none;
   color: #003366;
-  margin-right: auto;
 }
 
 .site-title:hover {
@@ -248,8 +247,7 @@
 }
 
 .header-nav {
-  margin-left: auto;
-  padding-right: 1rem; /* Optional: pushes button slightly more right */
+  /* No need for margin-left or padding now */
 }
 
 .header-nav .collection-button {
@@ -268,5 +266,3 @@
   background-color: #00509e;
   transform: translateY(-1px);
 }
-
-
