@@ -247,16 +247,26 @@
   text-decoration: underline;
 }
 
+.header-nav {
+  margin-left: auto;
+  padding-right: 1rem; /* Optional: pushes button slightly more right */
+}
+
 .header-nav .collection-button {
-  background: #003366;
+  background-color: #003366;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   text-decoration: none;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 
 .header-nav .collection-button:hover {
-  background: #00509e;
+  background-color: #00509e;
+  transform: translateY(-1px);
 }
+
 
