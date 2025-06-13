@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>David Zucca Art - Artifacts</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* [keep the same viewer CSS as before] */
+    .image-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .image-viewer.active {
+      display: flex;
+    }
+
+    .viewer-content {
+      display: flex;
+      gap: 2rem;
+      max-width: 90%;
+      max-height: 90vh;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .viewer-image {
+      max-width: 60%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    .image-meta {
+      background: rgba(255,255,255,0.05);
+      color: white;
+      padding: 1rem;
+      font-size: 1rem;
+      min-width: 200px;
+      max-width: 300px;
+      flex: 1;
+    }
+
+    .image-meta div {
+      margin-bottom: 0.5rem;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .close-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 1001;
+      user-select: none;
+      padding: 1rem;
+    }
+
+    .prev-btn { left: 20px; }
+    .next-btn { right: 20px; }
+
+    .nav-btn:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .viewer-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .viewer-image {
+        max-width: 100%;
+        max-height: 60vh;
+      }
+
+      .image-meta {
+        max-width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="top-header">
+  <div class="header-container">
+    <a href="/davidzucca/" class="site-title">David Zucca</a>
+    <nav class="header-nav">
+      <a href="collection.html" class="collection-button">Collection</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Artifact Gallery -->
+<section class="gallery">
+  <h2>Artifacts</h2>
+  <div class="gallery-grid">
+
+    <div class="gallery-item"><img src="images/ar1.jpg" alt="Artifact 1"></div>
+    <div class="gallery-item"><img src="images/ar2.jpg" alt="Artifact 2"></div>
+    <div class="gallery-item"><img src="images/ar3.jpg" alt="Artifact 3"></div>
+    <div class="gallery-item"><img src="images/ar4.jpg" alt="Artifact 4"></div>
+    <div class="gallery-item"><img src="images/ar5.jpg" alt="Artifact 5"></div>
+    <div class="gallery-item"><img src="images/ar6.jpg" alt="Artifact 6"></div>
+    <div class="gallery-item"><img src="images/ar7.jpg" alt="Artifact 7"></div>
+    <div class="gallery-item"><img src="images/ar8.jpg" alt="Artifact 8"></div>
+    <div class="gallery-item"><img src="images/ar9.jpg" alt="Artifact 9"></div>
+    <div class="gallery-item"><img src="images/ar10.jpg" alt="Artifact 10"></div>
+
+  </div>
+</section>
+
+<!-- Image Viewer -->
+<div id="image-viewer" class="image-viewer">
+  <div class="viewer-content">
+    <img class="viewer-image" src="" alt="">
+    <div class="image-meta">
+      <div id="viewer-title"></div>
+      <div id="viewer-medium"></div>
+      <div id="viewer-year"></div>
+      <div id="viewer-dimensions"></div>
+    </div>
+  </div>
+  <div class="close-btn">&times;</div>
+  <button class="nav-btn prev-btn">&#10094;</button>
+  <button class="nav-btn next-btn">&#10095;</button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const images = Array.from(document.querySelectorAll('.gallery-item img'));
+    const viewer = document.getElementById('image-viewer');
+    const viewerImg = document.querySelector('.viewer-image');
+    const viewerTitle = document.getElementById('viewer-title');
+    const viewerMedium = document.getElementById('viewer-medium');
+    const viewerYear = document.getElementById('viewer-year');
+    const viewerDimensions = document.getElementById('viewer-dimensions');
+    const closeBtn = document.querySelector('.close-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let currentIndex = -1;
+
+    function showImage(index) {
+      if (index < 0 || index >= images.length) return;
+      const img = images[index];
+      viewerImg.src = img.src;
+      viewerImg.alt = img.alt;
+      viewerTitle.textContent = img.alt || '';
+      viewerMedium.textContent = '';
+      viewerYear.textContent = '';
+      viewerDimensions.textContent = '';
+      currentIndex = index;
+      viewer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        showImage(index);
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      viewer.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    viewer.addEventListener('click', (e) => {
+      if (e.target === viewer) {
+        viewer.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage((currentIndex - 1 + images.length) % images.length);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage((currentIndex + 1) % images.length);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!viewer.classList.contains('active')) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          showImage((currentIndex - 1 + images.length) % images.length);
+          break;
+        case 'ArrowRight':
+          showImage((currentIndex + 1) % images.length);
+          break;
+        case 'Escape':
+          viewer.classList.remove('active');
+          document.body.style.overflow = 'auto';
+          break;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
