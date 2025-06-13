@@ -372,90 +372,86 @@
 
 
 <script>
+  
   document.addEventListener('DOMContentLoaded', function () {
-    const images = Array.from(document.querySelectorAll('.gallery-item img'));
-    const viewer = document.getElementById('image-viewer');
-    const viewerImg = document.querySelector('.viewer-image');
-    const viewerTitle = document.getElementById('viewer-title');
-    const viewerMedium = document.getElementById('viewer-medium');
-    const viewerYear = document.getElementById('viewer-year');
-    const viewerDimensions = document.getElementById('viewer-dimensions');
-    const closeBtn = document.querySelector('.close-btn');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
+  const images = Array.from(document.querySelectorAll('.gallery-item img'));
+  const viewer = document.getElementById('image-viewer');
+  const viewerImg = document.querySelector('.viewer-image');
+  const viewerTitle = document.getElementById('viewer-title');
+  const viewerMedium = document.getElementById('viewer-medium');
+  const viewerYear = document.getElementById('viewer-year');
+  const viewerDimensions = document.getElementById('viewer-dimensions');
+  const closeBtn = document.querySelector('.close-btn');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
 
-    let currentIndex = -1;
+  let currentIndex = -1;
 
-    function showImage(index) {
-      if (index < 0 || index >= images.length) return;
-      const img = images[index];
-      viewerImg.src = img.src;
-      viewerImg.alt = img.alt;
-      viewerTitle.textContent = img.alt || '';
-      viewerMedium.textContent = '';
-      viewerYear.textContent = '';
-      viewerDimensions.textContent = '';
-      currentIndex = index;
-      viewer.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+  function showImage(index) {
+    if (index < 0 || index >= images.length) return;
 
-    images.forEach((img, index) => {
-  const link = img.closest('a'); // get the <a> that wraps the image
-  img.addEventListener('click', (e) => {
-    e.preventDefault();
+    const img = images[index];
+    const link = img.closest('a');
 
     viewerImg.src = img.src;
     viewerImg.alt = img.alt;
     viewerTitle.textContent = link.dataset.title || img.alt || '';
     viewerMedium.textContent = link.dataset.medium || '';
     viewerYear.textContent = link.dataset.year || '';
-    viewerDimensions.textContent = link.dataset.dimensions || ''; // might be empty
+    viewerDimensions.textContent = link.dataset.dimensions || ''; // may be empty
     currentIndex = index;
 
     viewer.classList.add('active');
     document.body.style.overflow = 'hidden';
+  }
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', (e) => {
+      e.preventDefault();
+      showImage(index);
+    });
   });
-});
-    closeBtn.addEventListener('click', () => {
+
+  closeBtn.addEventListener('click', () => {
+    viewer.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+
+  viewer.addEventListener('click', (e) => {
+    if (e.target === viewer) {
       viewer.classList.remove('active');
       document.body.style.overflow = 'auto';
-    });
+    }
+  });
 
-    viewer.addEventListener('click', (e) => {
-      if (e.target === viewer) {
+  prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showImage((currentIndex - 1 + images.length) % images.length);
+  });
+
+  nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    showImage((currentIndex + 1) % images.length);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!viewer.classList.contains('active')) return;
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        showImage((currentIndex - 1 + images.length) % images.length);
+        break;
+      case 'ArrowRight':
+        showImage((currentIndex + 1) % images.length);
+        break;
+      case 'Escape':
         viewer.classList.remove('active');
         document.body.style.overflow = 'auto';
-      }
-    });
-
-    prevBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showImage((currentIndex - 1 + images.length) % images.length);
-    });
-
-    nextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showImage((currentIndex + 1) % images.length);
-    });
-
-        document.addEventListener('keydown', (e) => {
-      if (!viewer.classList.contains('active')) return;
-
-      switch (e.key) {
-        case 'ArrowLeft':
-          showImage((currentIndex - 1 + images.length) % images.length);
-          break;
-        case 'ArrowRight':
-          showImage((currentIndex + 1) % images.length);
-          break;
-        case 'Escape':
-          viewer.classList.remove('active');
-          document.body.style.overflow = 'auto';
-          break;
-      }
-    });
+        break;
+    }
   });
+});
+
 </script>
 
 
