@@ -401,11 +401,22 @@
     }
 
     images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        showImage(index);
-      });
-    });
+  const link = img.closest('a'); // get the <a> that wraps the image
+  img.addEventListener('click', (e) => {
+    e.preventDefault();
 
+    viewerImg.src = img.src;
+    viewerImg.alt = img.alt;
+    viewerTitle.textContent = link.dataset.title || img.alt || '';
+    viewerMedium.textContent = link.dataset.medium || '';
+    viewerYear.textContent = link.dataset.year || '';
+    viewerDimensions.textContent = link.dataset.dimensions || ''; // might be empty
+    currentIndex = index;
+
+    viewer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
     closeBtn.addEventListener('click', () => {
       viewer.classList.remove('active');
       document.body.style.overflow = 'auto';
