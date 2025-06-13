@@ -20,7 +20,8 @@
 }
 
 .bio-text p {
-  text-align: left;
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* Desktop layout */
@@ -35,10 +36,6 @@
     flex-shrink: 0;
   }
   
-  .bio-text p {
-    text-align: justify;
-    hyphens: auto;
-  }
 }
 
 /* GALLERY STYLES - FINAL VERSION */
