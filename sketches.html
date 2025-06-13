@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>David Zucca Art - Sketches</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .image-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+
+    .image-viewer.active {
+      display: flex;
+    }
+
+    .viewer-content {
+      display: flex;
+      gap: 2rem;
+      max-width: 90%;
+      max-height: 90vh;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .viewer-image {
+      max-width: 60%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    .image-meta {
+      background: rgba(255,255,255,0.05);
+      color: white;
+      padding: 1rem;
+      font-size: 1rem;
+      min-width: 200px;
+      max-width: 300px;
+      flex: 1;
+    }
+
+    .image-meta div {
+      margin-bottom: 0.5rem;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .close-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 1001;
+      user-select: none;
+      padding: 1rem;
+    }
+
+    .prev-btn { left: 20px; }
+    .next-btn { right: 20px; }
+
+    .nav-btn:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .viewer-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .viewer-image {
+        max-width: 100%;
+        max-height: 60vh;
+      }
+
+      .image-meta {
+        max-width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top-header">
+  <div class="header-container">
+    <a href="/davidzucca/" class="site-title">David Zucca</a>
+    <nav class="header-nav">
+      <a href="collection.html" class="collection-button">Collection</a>
+    </nav>
+  </div>
+</header>
+
+<section class="gallery">
+  <h2>Sketches</h2>
+  <div class="gallery-grid">
+    <!-- sk1.jpg to sk35.jpg -->
+    <div class="gallery-item"><img src="images/sk1.jpg" alt="Sketch 1"></div>
+    <div class="gallery-item"><img src="images/sk2.jpg" alt="Sketch 2"></div>
+    <div class="gallery-item"><img src="images/sk3.jpg" alt="Sketch 3"></div>
+    <div class="gallery-item"><img src="images/sk4.jpg" alt="Sketch 4"></div>
+    <div class="gallery-item"><img src="images/sk5.jpg" alt="Sketch 5"></div>
+    <div class="gallery-item"><img src="images/sk6.jpg" alt="Sketch 6"></div>
+    <div class="gallery-item"><img src="images/sk7.jpg" alt="Sketch 7"></div>
+    <div class="gallery-item"><img src="images/sk8.jpg" alt="Sketch 8"></div>
+    <div class="gallery-item"><img src="images/sk9.jpg" alt="Sketch 9"></div>
+    <div class="gallery-item"><img src="images/sk10.jpg" alt="Sketch 10"></div>
+    <div class="gallery-item"><img src="images/sk11.jpg" alt="Sketch 11"></div>
+    <div class="gallery-item"><img src="images/sk12.jpg" alt="Sketch 12"></div>
+    <div class="gallery-item"><img src="images/sk13.jpg" alt="Sketch 13"></div>
+    <div class="gallery-item"><img src="images/sk14.jpg" alt="Sketch 14"></div>
+    <div class="gallery-item"><img src="images/sk15.jpg" alt="Sketch 15"></div>
+    <div class="gallery-item"><img src="images/sk16.jpg" alt="Sketch 16"></div>
+    <div class="gallery-item"><img src="images/sk17.jpg" alt="Sketch 17"></div>
+    <div class="gallery-item"><img src="images/sk18.jpg" alt="Sketch 18"></div>
+    <div class="gallery-item"><img src="images/sk19.jpg" alt="Sketch 19"></div>
+    <div class="gallery-item"><img src="images/sk20.jpg" alt="Sketch 20"></div>
+    <div class="gallery-item"><img src="images/sk21.jpg" alt="Sketch 21"></div>
+    <div class="gallery-item"><img src="images/sk22.jpg" alt="Sketch 22"></div>
+    <div class="gallery-item"><img src="images/sk23.jpg" alt="Sketch 23"></div>
+    <div class="gallery-item"><img src="images/sk24.jpg" alt="Sketch 24"></div>
+    <div class="gallery-item"><img src="images/sk25.jpg" alt="Sketch 25"></div>
+    <div class="gallery-item"><img src="images/sk26.jpg" alt="Sketch 26"></div>
+    <div class="gallery-item"><img src="images/sk27.jpg" alt="Sketch 27"></div>
+    <div class="gallery-item"><img src="images/sk28.jpg" alt="Sketch 28"></div>
+    <div class="gallery-item"><img src="images/sk29.jpg" alt="Sketch 29"></div>
+    <div class="gallery-item"><img src="images/sk30.jpg" alt="Sketch 30"></div>
+    <div class="gallery-item"><img src="images/sk31.jpg" alt="Sketch 31"></div>
+    <div class="gallery-item"><img src="images/sk32.jpg" alt="Sketch 32"></div>
+    <div class="gallery-item"><img src="images/sk33.jpg" alt="Sketch 33"></div>
+    <div class="gallery-item"><img src="images/sk34.jpg" alt="Sketch 34"></div>
+    <div class="gallery-item"><img src="images/sk35.jpg" alt="Sketch 35"></div>
+
+    <!-- sk36.JPG to sk56.JPG -->
+    <div class="gallery-item"><img src="images/sk36.JPG" alt="Sketch 36"></div>
+    <div class="gallery-item"><img src="images/sk37.JPG" alt="Sketch 37"></div>
+    <div class="gallery-item"><img src="images/sk38.JPG" alt="Sketch 38"></div>
+    <div class="gallery-item"><img src="images/sk39.JPG" alt="Sketch 39"></div>
+    <div class="gallery-item"><img src="images/sk40.JPG" alt="Sketch 40"></div>
+    <div class="gallery-item"><img src="images/sk41.JPG" alt="Sketch 41"></div>
+    <div class="gallery-item"><img src="images/sk42.JPG" alt="Sketch 42"></div>
+    <div class="gallery-item"><img src="images/sk43.JPG" alt="Sketch 43"></div>
+    <div class="gallery-item"><img src="images/sk44.JPG" alt="Sketch 44"></div>
+    <div class="gallery-item"><img src="images/sk45.JPG" alt="Sketch 45"></div>
+    <div class="gallery-item"><img src="images/sk46.JPG" alt="Sketch 46"></div>
+    <div class="gallery-item"><img src="images/sk47.JPG" alt="Sketch 47"></div>
+    <div class="gallery-item"><img src="images/sk48.JPG" alt="Sketch 48"></div>
+    <div class="gallery-item"><img src="images/sk49.JPG" alt="Sketch 49"></div>
+    <div class="gallery-item"><img src="images/sk50.JPG" alt="Sketch 50"></div>
+    <div class="gallery-item"><img src="images/sk51.JPG" alt="Sketch 51"></div>
+    <div class="gallery-item"><img src="images/sk52.JPG" alt="Sketch 52"></div>
+    <div class="gallery-item"><img src="images/sk53.JPG" alt="Sketch 53"></div>
+    <div class="gallery-item"><img src="images/sk54.JPG" alt="Sketch 54"></div>
+    <div class="gallery-item"><img src="images/sk55.JPG" alt="Sketch 55"></div>
+    <div class="gallery-item"><img src="images/sk56.JPG" alt="Sketch 56"></div>
+  </div>
+</section>
+
+<div id="image-viewer" class="image-viewer">
+  <div class="viewer-content">
+    <img class="viewer-image" src="" alt="">
+    <div class="image-meta">
+      <div id="viewer-title"></div>
+      <div id="viewer-medium"></div>
+      <div id="viewer-year"></div>
+      <div id="viewer-dimensions"></div>
+    </div>
+  </div>
+  <div class="close-btn">&times;</div>
+  <button class="nav-btn prev-btn">&#10094;</button>
+  <button class="nav-btn next-btn">&#10095;</button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const images = Array.from(document.querySelectorAll('.gallery-item img'));
+    const viewer = document.getElementById('image-viewer');
+    const viewerImg = document.querySelector('.viewer-image');
+    const viewerTitle = document.getElementById('viewer-title');
+    const viewerMedium = document.getElementById('viewer-medium');
+    const viewerYear = document.getElementById('viewer-year');
+    const viewerDimensions = document.getElementById('viewer-dimensions');
+    const closeBtn = document.querySelector('.close-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let currentIndex = -1;
+
+    function showImage(index) {
+      if (index < 0 || index >= images.length) return;
+      const img = images[index];
+      viewerImg.src = img.src;
+      viewerImg.alt = img.alt;
+      viewerTitle.textContent = img.alt || '';
+      viewerMedium.textContent = '';
+      viewerYear.textContent = '';
+      viewerDimensions.textContent = '';
+      currentIndex = index;
+      viewer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        showImage(index);
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      viewer.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    viewer.addEventListener('click', (e) => {
+      if (e.target === viewer) {
+        viewer.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage((currentIndex - 1 + images.length) % images.length);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage((currentIndex + 1) % images.length);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!viewer.classList.contains('active')) return;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          showImage((currentIndex - 1 + images.length) % images.length);
+          break;
+        case 'ArrowRight':
+          showImage((currentIndex + 1) % images.length);
+          break;
+        case 'Escape':
+          viewer.classList.remove('active');
+          document.body.style.overflow = 'auto';
+          break;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
