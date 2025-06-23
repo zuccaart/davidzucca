@@ -220,10 +220,10 @@
       const img = images[index];
       viewerImg.src = img.src;
       viewerImg.alt = img.alt;
-      viewerTitle.textContent = img.alt || '';
-      viewerMedium.textContent = '';
-      viewerYear.textContent = '';
-      viewerDimensions.textContent = '';
+      viewerTitle.textContent = img.dataset.title || img.alt || '';
+viewerMedium.textContent = img.dataset.medium || '';
+viewerYear.textContent = img.dataset.year || '';
+viewerDimensions.textContent = img.dataset.dimensions || '';
       currentIndex = index;
       viewer.classList.add('active');
       document.body.style.overflow = 'hidden';
